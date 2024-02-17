@@ -21,4 +21,14 @@ public interface EmployeeService {
 
 	List<Employee> getEmployeeByCondition(Employee employee);
 
+	void save(Employee e);
+
+	Employee findById(int empId);
+
+	List<Employee> findAll();
+
+	void deleteById(int empId);
+	
+	Employee update(Employee e1);
+
 }

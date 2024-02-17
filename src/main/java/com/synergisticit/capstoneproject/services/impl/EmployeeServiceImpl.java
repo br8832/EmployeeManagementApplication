@@ -2,11 +2,13 @@ package com.synergisticit.capstoneproject.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.synergisticit.capstoneproject.model.Employee;
 import com.synergisticit.capstoneproject.repository.EmployeeRepository;
 import com.synergisticit.capstoneproject.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -150,5 +152,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employees;
     }
+    @Override
+    public Employee update(Employee e1) {
+    	System.out.println("Here"+e1);
+    	Employee e = getEmployeeById(e1.getEmpId());
+    	Employee emp=null;
+		if(e.getEmpId()!=0) {
+			emp = Employee.builder().id(e.getId()).empId(e1.getEmpId()).firstName(e1.getFirstName()).lastName(e1.getLastName()).salary(e1.getSalary()).build();
+			repository.save(emp);
+		}
+		return emp;	
+    }
+	@Override
+	public void save(Employee e) {
+		// TODO Auto-generated method stub
+		if(getEmployeeById(e.getEmpId()).getEmpId()!=0)
+			return;
+		repository.save(e);
+	}
+
+	@Override
+	public Employee findById(int empId) {
+		// TODO Auto-generated method stub
+		return getEmployeeById(empId);
+	}
+
+	@Override
+	public List<Employee> findAll() {
+		// TODO Auto-generated method stub
+		return getAll();
+	}
+
+	@Override
+	public void deleteById(int empId) {
+		// TODO Auto-generated method stub
+		repository.delete(findById(empId));
+	}
 
 }

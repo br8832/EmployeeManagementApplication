@@ -35,7 +35,8 @@ public class EmployeeManagementApp implements CommandLineRunner{
 			if (employees.isEmpty()) {
 				LOGGER.info("******* Inserting Employees to DB *******");
 				employeeRepository.saveAll(DBSupplierUtil.employeeSupplier.get());
-			} else {
+			} 
+			else {
 				LOGGER.info("******* Employees stored in DB Size :: {}", employees.size());
 				LOGGER.info("******* Employees stored in DB :: {}", employees);
 			}

@@ -13,11 +13,11 @@ public class DBSupplierUtil {
 
     public static Supplier<List<Employee>> employeeSupplier = () ->
             Arrays.asList(
-                    Employee.builder().empId(1).firstName("Bryan").lastName("Harry").salary(3000.0f).build(),
-                    Employee.builder().empId(2).firstName("Gauri").lastName("Kumari").salary(4000.0f).build(),
-                    Employee.builder().empId(3).firstName("Adrik").lastName("Addy").salary(5000.0f).build(),
-                    Employee.builder().empId(4).firstName("Arda").lastName("Aye").salary(6000.0f).build(),
-                    Employee.builder().empId(5).firstName("Khan").lastName("Khan").salary(7000.0f).build()
+                    Employee.builder().empId(6).firstName("Pedro").lastName("Sanchez").salary(2000.0f).build(),
+                    Employee.builder().empId(7).firstName("Churumbe").lastName("Malagueño").salary(1500.0f).build(),
+                    Employee.builder().empId(8).firstName("Alejandro").lastName("El Capitan").salary(5000.0f).build(),
+                    Employee.builder().empId(9).firstName("Vago").lastName("Malgueño").salary(1000.0f).build(),
+                    Employee.builder().empId(10).firstName("Andres").lastName("Alguacile").salary(2200.0f).build()
             );
 
 }

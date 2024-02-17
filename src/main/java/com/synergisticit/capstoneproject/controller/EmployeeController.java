@@ -16,12 +16,31 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("/get")
+    public Employee get(@RequestParam int id) {
+    	return employeeService.getEmployeeById(id);
+    }
+    @GetMapping("/delete")
+    public Employee delete(@RequestParam int id) {
+    	Employee e = employeeService.getEmployeeById(id);
+    	employeeService.deleteById(id);
+    	return e;
+    }
+    @GetMapping("/save")
+    public Employee save(@RequestParam int id, @RequestParam String firstname,@RequestParam String lastname, @RequestParam float salary) {
+    	employeeService.save(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+    	return employeeService.getEmployeeById(id);
+    }
+    @GetMapping("/update")
+    public Employee update(@RequestParam int id, @RequestParam String firstname,@RequestParam String lastname, @RequestParam float salary) {
+    	return employeeService.update(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+    }
     @GetMapping("/say")
     public String sayHello() {
         return "Hello Employee Management Application - Capstone Project";
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Employee> getAll() {
         return employeeService.getAll();
     }
