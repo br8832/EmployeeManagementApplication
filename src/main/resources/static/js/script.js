@@ -14,7 +14,6 @@ const response = await window.fetch("http://localhost:8080/getAll",{
  employees.then((r)=>{
 	 var list = r.sort((e1,e2)=>e1.empId-e2.empId);
 	 console.log(list)
-// Me
 const placement = document.getElementById("placement");
 placement.innerHTML="";
 var all = list.map((e)=>`<tr><td>${e.empId}</td><td>${e.salary}</td><td>${e.firstName}</td><td>${e.lastName}</td></tr>`).reduce((accum,curr)=>accum+curr)
@@ -27,20 +26,41 @@ stuff[1]=forms.item(1)
 stuff[2]=document.getElementsByTagName("table").item(0)
 stuff[3]=forms.item(2)
 stuff[4]=forms.item(3)
-buttons[6].addEventListener('click',(e)=>console.log(e))
+//console.log(buttons)
+function get(empId){
+	var id = empId
+	var e = r[id-1]
+	if(e) {
+		placement.innerHTML=`<tr><td>${e.empId}</td><td>${e.salary}</td><td>${e.firstName}</td><td>${e.lastName}</td></tr>`
+		buttons.item(1).classList.toggle('dipped')
+		stuff[1].className='toggle'
+		stuff[2].className=''
+	}
+	else{ alert("Doesn't exist")}
+}
+function getAll(){
+	placement.innerHTML="";
+	var text = list.map((e)=>`<tr><td>${e.empId}</td><td>${e.salary}</td><td>${e.firstName}</td><td>${e.lastName}</td></tr>`).reduce((accum,curr)=>accum+curr)
+	placement.innerHTML=text
+}
+var prev, active=2;
+//get is special
+buttons[6].addEventListener('click',(e)=>{get(e.target.form[0].value);e.preventDefault()})
 for(let i in stuff){
-  buttons.item(i).addEventListener('click',(e)=>{
-    console.log(e)
+  buttons.item(i).addEventListener('click',()=>{
+	  active = i
     stuff.reduce((_,curr,index)=>{
-      if(index==i){
-          curr.classList=''
-          buttons.item(i).classList.toggle('dipped')
-      }else
-      {
-       curr.classList='toggle'
-      }
-
+     index==i?curr.classList='':curr.classList='toggle'
+     //console.log(`prev:${prev} active:${active}, index:${index}, i:${i}`)
+     if(active==index){
+		 if(prev)
+		 buttons.item(prev).classList.toggle('dipped')
+		 prev=active
+		buttons.item(active).classList.toggle('dipped')
+	}
+     if(index==2)getAll()
     },0)
+    
   })
 }
 })

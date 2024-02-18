@@ -34,6 +34,7 @@ public class EmployeeModelController {
 	}
 	@RequestMapping("/save")
 	public ModelAndView saveEmp(@RequestParam String AddId, @RequestParam String AddSalary, @RequestParam String AddFirstName, @RequestParam String AddLastName) {
+		if(AddId!="")
 		employeeService.save(Employee.builder().empId(Integer.parseInt(AddId)).salary(Integer.parseInt(AddSalary))
 				.firstName(AddFirstName).lastName(AddLastName).build());
 		return form("");
@@ -53,6 +54,7 @@ public class EmployeeModelController {
 	
 	@RequestMapping("/update")
 	public ModelAndView updatesEmployee(@RequestParam String Id, @RequestParam String Salary, @RequestParam String FirstName, @RequestParam String LastName) {
+		if(Id!="")
 		System.out.println(employeeService.update(Employee.builder().empId(Integer.parseInt(Id)).
 				salary(Float.parseFloat(Salary)).firstName(FirstName).lastName(LastName).build()));
 		return form("");

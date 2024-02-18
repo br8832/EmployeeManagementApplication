@@ -1,4 +1,6 @@
 <%@page session="false" %>
+<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%> --%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -26,10 +28,6 @@
     <script src="js/script.js" defer></script>
   </head>
   <body>
-
-  <input id="e" value='${e}'/>
-
-  
       <img class="fixed" src="https://us-tuna-sounds-images.voicemod.net/dfe00298-0efe-4ccb-a1c4-8b456326ccb2-1659033930989.jpg" alt="Zarcillos">
   
     <div class="test">
@@ -94,7 +92,7 @@
     <button type="submit" class="submit" formaction="/save">Submit</button>
   </div>
 </form>
-<form class="toggle" action="/get">
+<form class="toggle">
   <div class="container" id="get">
     <h1>Get</h1>
     <p>Fill in ID of Employee to get their information</p>
