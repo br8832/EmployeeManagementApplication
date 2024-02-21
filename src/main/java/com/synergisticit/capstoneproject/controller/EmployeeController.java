@@ -23,17 +23,33 @@ public class EmployeeController {
     @GetMapping("/delete")
     public Employee delete(@RequestParam int id) {
     	Employee e = employeeService.getEmployeeById(id);
-    	employeeService.deleteById(id);
+    	try {
+			employeeService.deleteById(id);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	return e;
     }
     @GetMapping("/save")
     public Employee save(@RequestParam int id, @RequestParam String firstname,@RequestParam String lastname, @RequestParam float salary) {
-    	employeeService.save(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+    	try {
+			employeeService.save(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	return employeeService.getEmployeeById(id);
     }
     @GetMapping("/update")
     public Employee update(@RequestParam int id, @RequestParam String firstname,@RequestParam String lastname, @RequestParam float salary) {
-    	return employeeService.update(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+    	try {
+			return employeeService.update(Employee.builder().empId(id).firstName(firstname).lastName(lastname).salary(salary).build());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     }
     @GetMapping("/say")
     public String sayHello() {

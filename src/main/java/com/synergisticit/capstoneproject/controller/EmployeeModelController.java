@@ -3,6 +3,7 @@ package com.synergisticit.capstoneproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +35,17 @@ public class EmployeeModelController {
 	}
 	@RequestMapping("/save")
 	public ModelAndView saveEmp(@RequestParam String AddId, @RequestParam String AddSalary, @RequestParam String AddFirstName, @RequestParam String AddLastName) {
-		if(AddId!="")
-		employeeService.save(Employee.builder().empId(Integer.parseInt(AddId)).salary(Integer.parseInt(AddSalary))
-				.firstName(AddFirstName).lastName(AddLastName).build());
+		if(AddId!=""&&AddSalary!=""&&AddFirstName!=""&&AddLastName!="")
+			try {
+				employeeService.save(Employee.builder().empId(Integer.parseInt(AddId)).salary(Integer.parseInt(AddSalary))
+						.firstName(AddFirstName).lastName(AddLastName).build());
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
+			}
 		return form("");
 	}
 	
@@ -54,16 +63,32 @@ public class EmployeeModelController {
 	
 	@RequestMapping("/update")
 	public ModelAndView updatesEmployee(@RequestParam String Id, @RequestParam String Salary, @RequestParam String FirstName, @RequestParam String LastName) {
-		if(Id!="")
-		System.out.println(employeeService.update(Employee.builder().empId(Integer.parseInt(Id)).
-				salary(Float.parseFloat(Salary)).firstName(FirstName).lastName(LastName).build()));
+		if(Id!=""&&Salary!=""&&FirstName!=""&&LastName!="")
+			try {
+				System.out.println(employeeService.update(Employee.builder().empId(Integer.parseInt(Id)).
+						salary(Float.parseFloat(Salary)).firstName(FirstName).lastName(LastName).build()));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
+			}
 		return form("");
 	}
 	
 	
 	@RequestMapping("delete")
 	public ModelAndView deletesTheEmployee(@RequestParam String DelId) {
-		employeeService.deleteById(Integer.parseInt(DelId));
-		return form("");
+		try {
+			employeeService.deleteById(Integer.parseInt(DelId));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			
+		}
+		return form("").addObject(DelId, "Doesn't exist");
 	}
 }

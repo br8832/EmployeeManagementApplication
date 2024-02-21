@@ -1,6 +1,9 @@
-<%@page session="false" %>
-<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%> --%>
+<%@ page isELIgnored ="false" session="false"%>
+
+<%-- 
+I have no idea why the tag library doesn't work but every other thing does 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>  --%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -70,7 +73,7 @@
       
       </tbody>
     </table>
-<form class="toggle" >
+<form class="toggle" action="/save" >
   <div class="container" id="add">
     <h1>Add</h1>
     <p>Fill in details of Employee to add</p>
@@ -89,7 +92,7 @@
     <input type="text" placeholder="Enter LastName" name="AddLastName" id="AddLastName">
     <hr>
 
-    <button type="submit" class="submit" formaction="/save">Submit</button>
+    <button type="submit" class="submit" >Submit</button>
   </div>
 </form>
 <form class="toggle">

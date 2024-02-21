@@ -153,28 +153,32 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
     @Override
-    public Employee update(Employee e1) {
+    public Employee update(Employee e1) throws Exception {
     	System.out.println("Here"+e1);
     	Employee e = getEmployeeById(e1.getEmpId());
     	Employee emp=null;
-		if(e.getEmpId()!=0) {
-			emp = Employee.builder().id(e.getId()).empId(e1.getEmpId()).firstName(e1.getFirstName()).lastName(e1.getLastName()).salary(e1.getSalary()).build();
-			repository.save(emp);
+		if(e.getEmpId()==0) {
+			throw new Exception("Doesn't exist");
 		}
+		emp = Employee.builder().id(e.getId()).empId(e1.getEmpId()).firstName(e1.getFirstName()).lastName(e1.getLastName()).salary(e1.getSalary()).build();
+		repository.save(emp);
 		return emp;	
     }
 	@Override
-	public void save(Employee e) {
+	public void save(Employee e) throws Exception {
 		// TODO Auto-generated method stub
 		if(getEmployeeById(e.getEmpId()).getEmpId()!=0)
-			return;
+			throw new Exception("Already  exist");
 		repository.save(e);
 	}
 
 	@Override
-	public Employee findById(int empId) {
+	public Employee findById(int empId) throws Exception {
 		// TODO Auto-generated method stub
-		return getEmployeeById(empId);
+		Employee e = getEmployeeById(empId);
+		if(e.getEmpId()==0)
+			throw new Exception("Does not exist");
+		return e;
 	}
 
 	@Override
@@ -184,9 +188,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void deleteById(int empId) {
+	public void deleteById(int empId) throws Exception {
 		// TODO Auto-generated method stub
-		repository.delete(findById(empId));
+		Employee e = findById(empId);
+		if(e.getEmpId()==0) throw new Exception("Does not exist");
+		repository.delete(e);
 	}
 
 }

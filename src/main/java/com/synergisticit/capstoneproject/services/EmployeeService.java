@@ -21,14 +21,14 @@ public interface EmployeeService {
 
 	List<Employee> getEmployeeByCondition(Employee employee);
 
-	void save(Employee e);
+	void save(Employee e) throws Exception;
 
-	Employee findById(int empId);
+	Employee findById(int empId) throws Exception;
 
 	List<Employee> findAll();
 
-	void deleteById(int empId);
+	void deleteById(int empId) throws Exception; 
 	
-	Employee update(Employee e1);
+	Employee update(Employee e1) throws Exception;
 
 }
